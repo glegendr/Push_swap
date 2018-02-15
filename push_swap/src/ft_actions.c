@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 00:55:00 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/07 23:15:20 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/15 00:06:39 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char		*ft_swap(t_vec *va, t_vec *vb, char c)
 	}
 	else if (c == 'b' && v_size(vb) > 1)
 	{
-		v_swap(vb, v_size(vb), v_size(vb) - 1);
+		v_swap(vb, v_size(vb) - 1, v_size(vb) - 2);
 		return ("sb");
 	}
 	else if (c == 's')
@@ -65,21 +65,21 @@ char		*ft_rotate(t_vec *va, t_vec *vb, char c)
 	if (c == 'a')
 	{
 		if (v_size(va) > 1)
-			v_rotate(va);
+			v_reverse_rotate(va);
 		return ("ra");
 	}
 	else if (c == 'b')
 	{
 		if (v_size(vb) > 1)
-			v_rotate(vb);
+			v_reverse_rotate(vb);
 		return ("rb");
 	}
 	else
 	{
 		if (v_size(va) > 1)
-			v_rotate(va);
+			v_reverse_rotate(va);
 		if (v_size(vb) > 1)
-			v_rotate(vb);
+			v_reverse_rotate(vb);
 		return ("rr");
 	}
 }
@@ -89,21 +89,21 @@ char		*ft_reverse_rotate(t_vec *va, t_vec *vb, char c)
 	if (c == 'a')
 	{
 		if (v_size(va) > 1)
-			v_reverse_rotate(va);
+			v_rotate(va);
 		return ("rra");
 	}
 	else if (c == 'b')
 	{
 		if (v_size(vb) > 1)
-			v_reverse_rotate(vb);
+			v_rotate(vb);
 		return ("rrb");
 	}
 	else
 	{
 		if (v_size(va) > 1)
-			v_reverse_rotate(va);
+			v_rotate(va);
 		if (v_size(vb) > 1)
-			v_reverse_rotate(vb);
+			v_rotate(vb);
 		return ("rrr");
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 00:32:25 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/09 01:45:13 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/15 01:57:12 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_check(t_vec *va, t_vec *vb, char **argv, int argc)
 		while (i < y - 1)
 			if (tab[i++] == ft_atoi(argv[argc - y]))
 				ft_error(va, vb, va);
-		v_push(va, ft_itoa(ft_atoi(argv[argc - y])));
+		v_push_int(va, ft_atoi(argv[argc - y]));
 	}
 	free(tab);
 }
@@ -91,16 +91,12 @@ int		main(int argc, char **argv)
 	int		flag;
 	int		o = 0;
 
-	va = v_new(sizeof(char *));
-	vb = v_new(sizeof(char *));
+	va = v_new(sizeof(int));
+	vb = v_new(sizeof(int));
 	flag = ft_check_argv(argc, argv, &va, &vb);
 	ft_check(&va, &vb, argv, argc);
 	vp = v_new(sizeof(char));
-	//ft_divide(&va, &vb, &vp, flag, &o);
-//	printf("%s, %s && %s, %s, %s\n", v_get(&va, 0), v_get(&va, 1), v_get(&vb, 0), v_get(&vb, 1), v_get(&vb, 2));
-//	v_print(&vp, 1);
 	ft_algo3(&va, &vb, &vp, flag, &o);
-//	ft_algo(&va, &vb, &vp, flag, &o);
 	ft_print(&va, &vb, 2, "rrr");
 	printf("\n argc=%i, nb de combi=%i, sorted ?=%i\n", argc, o, ft_vb_issorted(&va));
 	ft_del_vec(&va, &vb, &vp);

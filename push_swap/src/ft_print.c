@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 00:08:03 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/07 22:53:07 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/13 21:55:26 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,18 @@ int		ft_search(t_vec *vec, char *v, char *s, int index)
 	return (0);
 }
 
-void	ft_color(char *s, int flag, int act, int i)
+void	ft_color(int *nb, int flag, int act, int i)
 {
+	char *s;
+
+	s = ft_itoa(nb[0]);
 	if (flag == 2 && act == 1)
 		write(1, "\033[33m", 5);
 	write(1, "    ", i);
 	write(1, s, ft_strlen(s));
 	if (flag == 2 && act == 1)
 		write(1, "\033[00m", 5);
+	free(s);
 }
 
 void	ft_print(t_vec *va, t_vec *vb, int flag, char *s)

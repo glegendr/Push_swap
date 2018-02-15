@@ -5,7 +5,7 @@ CFLAG=
 #CFLAG+= -Wextra
 #CFLAG+= -Wall
 #CFLAG+= -fsanitize=address
-SRCNAME=ft_actions ft_algo ft_algo3 ft_print ft_sorted main
+SRCNAME=ft_actions ft_algo ft_algo3 ft_algo4 ft_print ft_sorted main
 
 LIBS= ./dep/libft/libft.a ./dep/libmem/libmem.a ./dep/libvec/libvec.a
 
