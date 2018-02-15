@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 00:00:31 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/15 02:08:32 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/15 21:14:35 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "vector.h"
 
-void	ft_sort_vb(int quart, t_vec *vb, int flag, int *o)
+void	ft_sort_vb(int quart, t_vec *vb, int flag, int *o, t_vec *vp)
 {
 	int i;
 	int min;
@@ -32,14 +32,16 @@ void	ft_sort_vb(int quart, t_vec *vb, int flag, int *o)
 		{
 			if (((int *)v_get(vb, v_size(vb) - 1))[0] > ((int *)v_get(vb, v_size(vb) - 2))[0] && ((int *)v_get(vb, v_size(vb) - 1))[0] != min)
 			{
-				ft_swap(vb, vb, 'b');
+				v_append_raw(vp, ft_swap(vb, vb, 'b'), 2);
 				ft_print(vb, vb, flag, "sb");
+						v_push(vp, "\n");
 				*o += 1;
 			}
 			if (ft_va_issorted2(vb))
 				break ;
-			ft_rotate(vb, vb, 'b');
+				v_append_raw(vp, ft_rotate(vb, vb, 'b'), 2);
 			ft_print(vb, vb, flag, "rb");
+						v_push(vp, "\n");
 			++i;
 			*o += 1;
 		}
@@ -47,21 +49,23 @@ void	ft_sort_vb(int quart, t_vec *vb, int flag, int *o)
 		{
 			if (((int *)v_get(vb, v_size(vb) - 1))[0] > ((int *)v_get(vb, v_size(vb) - 2))[0] && ((int *)v_get(vb, v_size(vb) - 1))[0] != min)
 			{
-				ft_swap(vb, vb, 'b');
+				v_append_raw(vp, ft_swap(vb, vb, 'b'), 2);
 				ft_print(vb, vb, flag, "sb");
+						v_push(vp, "\n");
 				*o += 1;
 			}
 			if (ft_va_issorted2(vb))
 				break ;
-			ft_reverse_rotate(vb, vb, 'b');
+			v_append_raw(vp, ft_reverse_rotate(vb, vb, 'b'), 3);
 			ft_print(vb, vb, flag, "rrb");
+						v_push(vp, "\n");
 			*o += 1;
 			--i;
 		}
 	}
 }
 
-void	ft_sort_va(int quart, t_vec *vb, int flag, int *o)
+void	ft_sort_va(int quart, t_vec *vb, int flag, int *o, t_vec *vp)
 {
 	int i;
 	int min;
@@ -78,14 +82,16 @@ void	ft_sort_va(int quart, t_vec *vb, int flag, int *o)
 		{
 			if (((int *)v_get(vb, v_size(vb) - 1))[0] < ((int *)v_get(vb, v_size(vb) - 2))[0] && ((int *)v_get(vb, v_size(vb) - 1))[0] != min)
 			{
-				ft_swap(vb, vb, 'b');
-				ft_print(vb, vb, flag, "sb");
+					ft_swap(vb, vb, 'b');
+					v_append_raw(vp, "sa\n", 3);
+				ft_print(vb, vb, flag, "sa");
 				*o += 1;
 			}
 			if (ft_va_issorted(vb))
 				break ;
-			ft_rotate(vb, vb, 'b');
-			ft_print(vb, vb, flag, "rb");
+				v_append_raw(vp, ft_rotate(vb, vb, 'a'), 2);
+			ft_print(vb, vb, flag, "ra");
+						v_push(vp, "\n");
 			++i;
 			*o += 1;
 		}
@@ -93,14 +99,16 @@ void	ft_sort_va(int quart, t_vec *vb, int flag, int *o)
 		{
 			if (((int *)v_get(vb, v_size(vb) - 1))[0] < ((int *)v_get(vb, v_size(vb) - 2))[0] && ((int *)v_get(vb, v_size(vb) - 1))[0] != min)
 			{
-				ft_swap(vb, vb, 'b');
+				v_append_raw(vp, ft_swap(vb, vb, 'a'), 2);
 				ft_print(vb, vb, flag, "sb");
+						v_push(vp, "\n");
 				*o += 1;
 			}
 			if (ft_va_issorted(vb))
 				break ;
-			ft_reverse_rotate(vb, vb, 'b');
+			v_append_raw(vp, ft_reverse_rotate(vb, vb, 'a'), 3);
 			ft_print(vb, vb, flag, "rrb");
+						v_push(vp, "\n");
 			*o += 1;
 			--i;
 		}
@@ -150,35 +158,43 @@ void	ft_algo3(t_vec *va, t_vec *vb, t_vec *vp, int flag, int *o)
 		{
 			if (((int *)v_get(va, v_size(va) - 1))[0] > quartile[i])
 			{
-				ft_push(va, vb, 'b');
+				v_append_raw(vp, ft_push(va, vb, 'b'), 2);
 				//	ft_print(va, vb, flag, "pb");
-				//	v_push(vp, "\n");
+					v_push(vp, "\n");
 				if (((int *)v_get(vb, v_size(vb) - 1))[0] > ((int *)v_get(vb, v_size(vb) - 2))[0])
 				{
-					ft_swap(va, vb, 'b');
+				v_append_raw(vp, ft_swap(va, vb, 'b'), 2);
 					ft_print(va, vb, flag, "sb");
+					v_push(vp, "\n");
 					*o += 1;
 				}
+/*				if (((int *)v_get(va, v_size(va) - 1))[0] < ((int *)v_get(va, v_size(va) - 2))[0] && ((int *)v_get(va, v_size(va) - 2))[0] < quartile[i])
+				{
+					ft_swap(va, vb, 'a');
+					ft_print(va, vb, flag, "sa");
+					*o += 1;
+				}*/
 				--y;
 			}
 			else
 			{
 				v_append_raw(vp, ft_rotate(va, vb, 'a'), 2);
 				//ft_print(va, vb, flag, "ra");
-				//		v_push(vp, "\n");
+						v_push(vp, "\n");
 				++y;
 			}
 			*o += 1;
 		}
-		ft_print(va, vb, 2, "rrr");
+	//	ft_print(va, vb, 2, "rrr");
 		printf("%i\t%i\t%i\n", v_size(va), i, quartile[1]);
-		ft_sort_vb(quartile[1], vb, flag, o);
+		ft_sort_vb(quartile[1], vb, flag, o, vp);
 		--i;
 	}
-	ft_sort_va(v_size(va), va, flag, o);
+	ft_sort_va(v_size(va), va, flag, o, vp);
 	while (v_size(vb) > 0)
 	{
-		ft_push(va, vb, 'a');
+		v_append_raw(vp, ft_push(va, vb, 'a'), 2);
+		v_push(vp, "\n");
 		*o += 1;
 	}
 }

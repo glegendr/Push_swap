@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 00:55:00 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/15 00:06:39 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/15 23:29:49 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ char		*ft_swap(t_vec *va, t_vec *vb, char c)
 	if (c == 'a' && v_size(va) > 1)
 	{
 		v_swap(va, v_size(va), v_size(va) - 1);
-		return ("sa");
+		return ("sa\n");
 	}
 	else if (c == 'b' && v_size(vb) > 1)
 	{
 		v_swap(vb, v_size(vb) - 1, v_size(vb) - 2);
-		return ("sb");
+		return ("sb\n");
 	}
 	else if (c == 's')
 	{
@@ -32,12 +32,12 @@ char		*ft_swap(t_vec *va, t_vec *vb, char c)
 			v_swap(va, v_size(va), v_size(va) - 1);
 		if (v_size(vb) > 1)
 			v_swap(vb, v_size(vb), v_size(vb) - 1);
-		return ("ss");
+		return ("ss\n");
 	}
 	else if (c == 'a')
-		return ("sa");
+		return ("sa\n");
 	else
-		return ("sb");
+		return ("sb\n");
 }
 
 char		*ft_push(t_vec *va, t_vec *vb, char c)
@@ -46,18 +46,18 @@ char		*ft_push(t_vec *va, t_vec *vb, char c)
 	{
 		v_push(va, v_get(vb, v_size(vb) - 1));
 		v_del_last(vb);
-		return ("pa");
+		return ("pa\n");
 	}
 	else if (c == 'b' && v_size(va) > 0)
 	{
 		v_push(vb, v_get(va, v_size(va) - 1));
 		v_del_last(va);
-		return ("pb");
+		return ("pb\n");
 	}
 	else if (c == 'a')
-		return ("pa");
+		return ("pa\n");
 	else
-		return ("pb");
+		return ("pb\n");
 }
 
 char		*ft_rotate(t_vec *va, t_vec *vb, char c)
@@ -66,13 +66,13 @@ char		*ft_rotate(t_vec *va, t_vec *vb, char c)
 	{
 		if (v_size(va) > 1)
 			v_reverse_rotate(va);
-		return ("ra");
+		return ("ra\n");
 	}
 	else if (c == 'b')
 	{
 		if (v_size(vb) > 1)
 			v_reverse_rotate(vb);
-		return ("rb");
+		return ("rb\n");
 	}
 	else
 	{
@@ -80,7 +80,7 @@ char		*ft_rotate(t_vec *va, t_vec *vb, char c)
 			v_reverse_rotate(va);
 		if (v_size(vb) > 1)
 			v_reverse_rotate(vb);
-		return ("rr");
+		return ("rr\n");
 	}
 }
 
@@ -90,13 +90,13 @@ char		*ft_reverse_rotate(t_vec *va, t_vec *vb, char c)
 	{
 		if (v_size(va) > 1)
 			v_rotate(va);
-		return ("rra");
+		return ("rra\n");
 	}
 	else if (c == 'b')
 	{
 		if (v_size(vb) > 1)
 			v_rotate(vb);
-		return ("rrb");
+		return ("rrb\n");
 	}
 	else
 	{
@@ -104,6 +104,6 @@ char		*ft_reverse_rotate(t_vec *va, t_vec *vb, char c)
 			v_rotate(va);
 		if (v_size(vb) > 1)
 			v_rotate(vb);
-		return ("rrr");
+		return ("rrr\n");
 	}
 }

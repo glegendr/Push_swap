@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 00:32:25 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/15 01:57:12 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/16 00:28:29 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_del_vec(t_vec *vp, t_vec *va, t_vec *vb)
 	v_del(vb);
 }
 
-int		main(int argc, char **argv)
+int		maini(int argc, char **argv)
 {
 	char	*s;
 	t_vec	va;
@@ -96,8 +96,9 @@ int		main(int argc, char **argv)
 	flag = ft_check_argv(argc, argv, &va, &vb);
 	ft_check(&va, &vb, argv, argc);
 	vp = v_new(sizeof(char));
-	ft_algo3(&va, &vb, &vp, flag, &o);
+	ft_algo4(&va, &vb, &vp, flag);
 	ft_print(&va, &vb, 2, "rrr");
+	v_print(&vp, 1);
 	printf("\n argc=%i, nb de combi=%i, sorted ?=%i\n", argc, o, ft_vb_issorted(&va));
 	ft_del_vec(&va, &vb, &vp);
 	return (0);
