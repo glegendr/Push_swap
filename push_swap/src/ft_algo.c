@@ -1,146 +1,185 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_algo.c                                          :+:      :+:    :+:   */
+/*   ft_algo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/08 02:12:24 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/09 00:00:22 by glegendr         ###   ########.fr       */
+/*   Created: 2018/02/15 22:26:59 by glegendr          #+#    #+#             */
+/*   Updated: 2018/02/20 23:32:42 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "vector.h"
-#include "libft.h"
+#include <stdio.h>
 
-t_vec		*ft_algo2(t_vec *va, t_vec *vb, t_vec *vp, int flag, int *o)
+int		nbef(t_vec *v, int next)
 {
 	int i;
-	char *s;
 	int min;
-	int min2;
-	int pos;
-	int pos2;
+	int ret;
+	int check;
 
-	while (v_size(va) > 2 && !ft_va_issorted2(va))
-	{
-		i = 0;
-		min = 2147483647;
-		min2 = 2147483647;
-		while (i < v_size(va))
+	ret = 0;
+	i = 0;
+	min = -2147483648;
+	check = 0;
+	while (i++ < v_size(v))
+		if (vec_get(v, i - 1) > min && vec_get(v, i - 1) < next)
 		{
-			if (min > ft_atoi(v_get(va, i)))
-			{
-				min2 = min;
-				pos2 = pos;
-				min = ft_atoi(v_get(va, i));
-				pos = i;
-			}
-			if (min2 > ft_atoi(v_get(va, i)) && min != ft_atoi(v_get(va, i)))
-			{
-				min2 = ft_atoi(v_get(va, i));
-				pos2 = i;
-			}
-			++i;
+			ret = v_size(v) - (i - 1);
+			min = vec_get(v, i - 1);
+			check = 1;
 		}
-		printf("%i\t%i\n", min, min2);
-		if ((pos < v_size(va) / 2 && pos2 < pos) ||(pos > v_size(va) / 2 && pos2 > pos))
+	min = 2147483647;
+	if (check == 0)
+		while (i-- > 0)
+			if (vec_get(v, i - 1) < min && vec_get(v, i - 1) > next)
 			{
-				min = min2;
-				pos = pos2;
+				ret = v_size(v) - (i - 2);
+				min = vec_get(v, i - 1);
+				check = 1;
 			}
-		if (pos >= v_size(va) / 2)
-			while (min != ft_atoi(v_get(va, v_size(va) - 1)))
-			{
-				v_append_raw(vp, s = ft_rotate(va, vb, 'a'), 2);
-				ft_print(va, vb, flag, s);
-				v_push(vp, "\n");
-				*o += 1;
-			}
-		else
-			while (min != ft_atoi(v_get(va, v_size(va) - 1)))
-			{
-				v_append_raw(vp, s = ft_reverse_rotate(va, vb, 'a'), 3);
-				ft_print(va, vb, flag, s);
-				v_push(vp, "\n");
-				*o += 1;
-			}
-		if (!ft_va_issorted2(va))
-		{
-			v_append_raw(vp, s = ft_push(va, vb, 'b'), 2);
-			ft_print(va, vb, 2, s);
-			v_push(vp, "\n");
-			*o += 1;
-			if (ft_atoi(v_get(vb, v_size(vb) - 1)) < ft_atoi(v_get(vb, v_size(vb) - 2)))
-			{
-			v_append_raw(vp, s = ft_swap(va, vb, 'b'), 2);
-			ft_print(va, vb, flag, s);
-			v_push(vp, "\n");
-			*o += 1;
-			}
-		}
-	}
-	if (!ft_va_issorted2(va))
-	{
-			v_append_raw(vp, s = ft_swap(va, vb, 'a'), 2);
-			ft_print(va, vb, flag, s);
-			v_push(vp, "\n");
-			*o += 1;
-	}
-	while (v_size(vb) > 0)
-	{
-			v_append_raw(vp, s = ft_push(va, vb, 'a'), 2);
-			ft_print(va, vb, flag, s);
-			v_push(vp, "\n");
-			*o += 1;
-				if (ft_atoi(v_get(va, v_size(va) - 1)) > ft_atoi(v_get(va, v_size(va) - 2)))
-				{
-			v_append_raw(vp, s = ft_swap(va, vb, 'a'), 2);
-			ft_print(va, vb, flag, s);
-			v_push(vp, "\n");
-			*o += 1;
-				}
-	}
-	return (vp);
+	if (ret > v_size(v))
+		return (1);
+	return (ret);
 }
-t_vec		*ft_algo(t_vec *va, t_vec *vb, t_vec *vp, int flag, int *o)
+
+int		nbmin(t_vec *v)
 {
-	char *s;
-	int max;
+	int min;
 	int i;
 
 	i = 0;
-	max = -2147483648;
-	while (i < v_size(va))
+	min = 2147483647;
+	while (i < v_size(v))
 	{
-		if (max <= ft_atoi(v_get(va, i)))
-			max = ft_atoi(v_get(va, i));
+		if (vec_get(v, i) < min)
+			min = vec_get(v, i);
 		++i;
 	}
-	while (!ft_va_issorted2(va))
+	return (min);
+}
+
+int		nbpos(t_vec *v, int nb)
+{
+	int pos;
+
+	pos = 0;
+	while (pos < v_size(v))
 	{
-		if (ft_atoi(v_get(va, v_size(va) - 1)) > ft_atoi(v_get(va, v_size(va) - 2)) && ft_atoi(v_get(va, v_size(va) - 1)) != max)
+		if (vec_get(v, pos) == nb)
+			return (v_size(v) - pos);
+		++pos;
+	}
+	return (v_size(v));
+}
+
+int		nextnb_inquart(t_vec *v, int quart)
+{
+	int i;
+
+	i = 1;
+	while (i < v_size(v))
+	{
+		if (vec_gsize(v, i) <= quart)
+			return (vec_gsize(v, i));
+		++i;
+	}
+	return (0);
+}
+
+int		sort_part_i(t_vec *va, t_vec *vb, t_vec *vp, int flag, int quart)
+{
+	int o;
+	int y;
+
+	y = 0;
+	o = 0;
+	while (y < v_size(va))
+	{
+		if (vec_gsize(va, 1) <= quart)
 		{
-			v_append_raw(vp, s = ft_swap(va, vb, 'a'), 2);
-			ft_print(va, va, flag, s);
-			v_push(vp, "\n");
-				*o += 1;
+			while (nbef(vb, vec_gsize(va, 1)) != 1 && v_size(vb) > 0 && nbef(vb, vec_gsize(va, 1)) < v_size(vb) / 2)
+			{
+				//				printf("Rb\n");
+				v_append_raw(vp, ft_rotate(va, vb, 'b'), 3);
+				ft_print(va, vb, flag, "rb");
+				++o;
+			}
+			while (v_size(vb) > 1 && nbef(vb, vec_gsize(va, 1)) >= v_size(vb) / 2 &&
+					nbef(vb, vec_gsize(va, 1)) != 1)
+			{
+				//				printf("RRR\n");
+				v_append_raw(vp, ft_reverse_rotate(va, vb, 'b'), 4);
+				ft_print(va, vb, flag, "rrb");
+				++o;
+			}
+			v_append_raw(vp, ft_push(va, vb, 'b'), 3);
+			ft_print(va, vb, flag, "pb");
+			--y;
 		}
 		else
 		{
-			v_append_raw(vp, s = ft_rotate(va, vb, 'a'), 3);
-			ft_print(va, va, flag, s);
-			v_push(vp, "\n");
-				*o += 1;
+			/*if (nbef(vb, vec_gsize(va, 1)) != 1 && nbef(vb, vec_gsize(va, 1)) > v_size(vb) / 2)
+			  {
+			//				printf("RR\n");
+			v_append_raw(vp, ft_reverse_rotate(va, vb, 'b'), 4);
+			ft_print(va, vb, flag, "rrb");
+			}*/
+			if ((nbef(vb, nextnb_inquart(va, quart)) != 1 && nbef(vb, nextnb_inquart(va, quart)) <= (v_size(vb) + nextnb_inquart(va, quart)) / 2))
+			{
+				//				printf("RR\n");
+				v_append_raw(vp, ft_rotate(va, vb, 'r'), 3);
+				ft_print(va, vb, flag, "rr");
+				++y;
+			}
+			else
+			{
+				//				printf("RA\n");
+				v_append_raw(vp, ft_rotate(va, vb, 'a'), 3);
+				ft_print(va, vb, flag, "ra");
+				++y;
+			}
 		}
+		++o;
+	}
+	while (!ft_va_issorted(vb) && nbpos(vb, nbmin(vb)) < v_size(vb) / 2)
+	{
+		v_append_raw(vp, ft_rotate(va, vb, 'b'), 3);
+		ft_print(va, vb, flag, "rb");
+		++o;
+	}
+	while (!ft_va_issorted(vb))
+	{
+		v_append_raw(vp, ft_reverse_rotate(va, vb, 'b'), 4);
+		ft_print(va, vb, flag, "rrb");
+		++o;
+	}
+	return (o);
+}
+
+int		ft_algo(t_vec *va, t_vec *vb, t_vec *vp, int flag)
+{
+	int *quart;
+	int o;
+	int i;
+
+	o = 0;
+	if (ft_sorted(va, vb))
+		return (0);
+	quart = ft_quartile(va);
+	i = 1;
+	while (i <= 10)
+	{
+		o += sort_part_i(va, vb, vp, flag, quart[i]);
+		++i;
 	}
 	while (v_size(vb) > 0)
 	{
-			v_append_raw(vp, s = ft_push(va, vb, 'a'), 2);
-			ft_print(va, vb, flag, s);
-			v_push(vp, "\n");
-				*o += 1;
+		v_append_raw(vp, ft_push(va, vb, 'a'), 3);
+		ft_print(va, vb, flag, "pa");
+		++o;
 	}
-	return (vp);
+	return (o);
 }
