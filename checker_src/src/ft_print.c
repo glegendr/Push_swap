@@ -6,14 +6,13 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 00:08:03 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/07 00:55:29 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/20 22:31:11 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
 #include "vector.h"
-#include "get_next_line.h"
 
 int		ft_search(t_vec *vec, char *v, char *s, int index)
 {
@@ -36,38 +35,46 @@ int		ft_search(t_vec *vec, char *v, char *s, int index)
 	return (0);
 }
 
-void	ft_color(char *s, int flag, int act, int i)
+void	ft_color(int nb, int flag, int act, int i)
 {
+	char *s;
+	if (nb != 0)
+		s = ft_itoa(nb);
 	if (flag == 2 && act == 1)
 		write(1, "\033[33m", 5);
-	write(1, "    ", i);
-	write(1, s, ft_strlen(s));
+	if (nb != 0)
+		write(1, s, ft_strlen(s));
+	else
+		write(1, "0", 1);
+	if (i == 1 && nb != 0)
+		write(1, "            ", 12 - ft_strlen(s));
+	else if (i == 1)
+		write(1, "           ", 11);
 	if (flag == 2 && act == 1)
 		write(1, "\033[00m", 5);
+	if (nb != 0)
+		free(s);
 }
 
 void	ft_print(t_vec *va, t_vec *vb, int flag, char *s)
 {
 	int r;
-	int i;
 
+	if (flag == 0)
+		return ;
 	r = v_size(va);
 	if (r < v_size(vb))
 		r = v_size(vb);
 	while (r > 0)
 	{
-		i = 0;
 		if (v_size(va) >= r)
-		{
-			ft_color(v_get(va, r - 1), flag, ft_search(va, "va", s, r), 1);
-			i = 1;
-		}
-		if (v_size(vb) >= r && i == 1)
-			ft_color(v_get(vb, r - 1), flag, ft_search(vb, "vb", s, r), 2);
-		if (v_size(vb) >= r && i == 0)
-			ft_color(v_get(vb, r - 1), flag, ft_search(vb, "vb", s, r), 4);
+			ft_color(vec_get(va, r - 1), flag, ft_search(va, "va", s, r), 1);
+		else
+			write(1, "            ", 12);
+		if (v_size(vb) >= r)
+			ft_color(vec_get(vb, r - 1), flag, ft_search(vb, "vb", s, r), 0);
 		write(1, "\n", 1);
 		--r;
 	}
-	write(1, "------\n a  b \n\n", 15);
+	write(1, "------------------------\n a            b\n\n", 41);
 }

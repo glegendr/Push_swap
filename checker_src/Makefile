@@ -1,11 +1,10 @@
-NAME=Push_swap
+NAME=checker
 CC=gcc
 CFLAG=
-#CFLAG+= -Werror
-#CFLAG+= -Wextra
-#CFLAG+= -Wall
-#CFLAG+= -fsanitize=address
-SRCNAME=*
+CFLAG+= -Werror
+CFLAG+= -Wextra
+CFLAG+= -Wall
+SRCNAME=carve_argv ft_actions ft_algo ft_print ft_sorted get_next_line main
 
 LIBS= ./dep/libft/libft.a ./dep/libmem/libmem.a ./dep/libvec/libvec.a
 
