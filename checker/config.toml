@@ -1,6 +1,0 @@
-is_lib = false
-name = "Push_swap"
-
-[dependencies]
-libft = "https://github.com/glegendr/libft.git"
-libvec = "https://github.com/glegendr/libvec.git"
