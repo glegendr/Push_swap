@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 00:55:00 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/21 23:31:22 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/21 23:49:28 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@ char		*ft_swap(t_vec *va, t_vec *vb, char c)
 {
 	if (c == 'a' && v_size(va) > 1)
 	{
-		v_swap(va, v_size(va), v_size(va) - 1);
+		v_swap(va, v_size(va) - 1, v_size(va) - 2);
 		return ("sa\n");
 	}
 	else if (c == 'b' && v_size(vb) > 1)
 	{
-		v_swap(vb, v_size(vb), v_size(vb) - 1);
+		v_swap(vb, v_size(vb) - 1, v_size(vb) - 2);
 		return ("sb\n");
 	}
 	else if (c == 's')
 	{
 		if (v_size(va) > 1)
-			v_swap(va, v_size(va), v_size(va) - 1);
+			v_swap(va, v_size(va) - 1, v_size(va) - 2);
 		if (v_size(vb) > 1)
-			v_swap(vb, v_size(vb), v_size(vb) - 1);
+			v_swap(vb, v_size(vb) - 1, v_size(vb) - 2);
 		return ("ss\n");
 	}
 	else if (c == 'a')
