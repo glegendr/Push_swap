@@ -6,15 +6,14 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 00:32:25 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/20 23:34:46 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/21 22:32:38 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
-#include "vector.h"
 
-void	ft_error(t_vec *va, t_vec *vb, t_vec *vp)
+void	ft_error_del(t_vec *va, t_vec *vb, t_vec *vp)
 {
 	write(2, "Error\n", 6);
 	if (v_size(va) != 0)
@@ -32,16 +31,15 @@ int		ft_check_argv(int argc, char **argv, t_vec *va, t_vec *vb)
 
 	flag = 0;
 	if (argc <= 1)
-		ft_error(va, vb, va);
-	flag = 0;
+		ft_error_del(va, vb, va);
 	if (!ft_strcmp(argv[1], "-v") || !ft_strcmp(argv[1], "-c"))
 		flag = 1;
 	if (argc <= 2 && flag == 1)
-		ft_error(va, vb, va);
+		ft_error_del(va, vb, va);
 	if ((!ft_strcmp(argv[2], "-v") || !ft_strcmp(argv[2], "-c")) && flag == 1)
 		flag = 2;
 	if (argc <= 3 && flag > 0)
-		ft_error(va, vb, va);
+		ft_error_del(va, vb, va);
 	if (flag == 1 && !ft_strcmp(argv[1], "-c"))
 		flag = 0;
 	return (flag);
@@ -64,12 +62,12 @@ void	ft_check(t_vec *va, t_vec *vb, char **argv, int argc)
 			if ((argv[argc - y][i - 1] > '9' || argv[argc - y][i - 1] < '0') &&
 					argv[argc - y][i - 1] != '-' &&
 					argv[argc - y][i - 1] != '+')
-				ft_error(va, vb, va);
+				ft_error_del(va, vb, va);
 		i = 0;
 		tab[y - 1] = ft_atoi(argv[argc - y]);
 		while (i < y - 1)
 			if (tab[i++] == ft_atoi(argv[argc - y]))
-				ft_error(va, vb, va);
+				ft_error_del(va, vb, va);
 		v_push_int(va, ft_atoi(argv[argc - y]));
 	}
 	free(tab);
@@ -84,25 +82,23 @@ void	ft_del_vec(t_vec *vp, t_vec *va, t_vec *vb)
 
 int		main(int argc, char **argv)
 {
-	char	*s;
 	t_vec	va;
 	t_vec	vb;
 	t_vec	vp;
 	int		flag;
-	int		o = 0;
 
+	argv = carve_argv(&argc, argv);
+	if (argc <= 2)
+		ft_error();
+	check_int(argc, argv);
 	va = v_new(sizeof(int));
 	vb = v_new(sizeof(int));
 	flag = ft_check_argv(argc, argv, &va, &vb);
 	ft_check(&va, &vb, argv, argc);
 	vp = v_new(sizeof(char));
-	if (v_size(&va) > 10)
-		o += ft_algo(&va, &vb, &vp, flag);
-	else
-		exit(1);
-	ft_print(&va, &vb, 2, "rrr");
-//	v_print(&vp, 1);
-	printf("\n argc=%i, nb de combi=%i, sorted ?=%i\n", argc, o, ft_sorted(&va, &vb));
+	if (v_size(&va) >= 11)
+	ft_algo(&va, &vb, &vp, flag);
+	v_print(&vp, 1);
 	ft_del_vec(&va, &vb, &vp);
 	return (0);
 }
