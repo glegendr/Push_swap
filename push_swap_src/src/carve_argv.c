@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 20:19:09 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/21 22:30:33 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/23 02:18:21 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,31 +34,29 @@ void		check_int(int argc, char **argv)
 	}
 }
 
-char	**tab_join(char **tab, char *s, int i)
+char	**tab_join(char **tab, char *s)
 {
+	int i;
 	char **tmp;
 
+	i = 0;
 	if (tab == NULL)
 	{
-		tmp = (char **)malloc(sizeof(char *) * 2);
-		tmp[0] = (char *)malloc(sizeof(char) * ft_strlen(s));
-		ft_memcpy(tmp[0], s, ft_strlen(s));
-		tmp[1] = NULL;
-		return (tmp);
+		tab = (char **)malloc(sizeof(char *) * 2);
+		tab[0] = ft_strdup(s);
+		tab[1] = NULL;
+		return (tab);
 	}
 	while (tab[i++]);
-	tmp = (char **)malloc(sizeof(char *) * (i + 1));
+	tmp = (char **)malloc(sizeof(char *) * (i + 2));
 	i = 0;
 	while (tab[i])
 	{
-		tmp[i] = (char *)malloc(sizeof(char) * ft_strlen(tab[i]));
-		ft_memcpy(tmp[i], tab[i], ft_strlen(tab[i]));
+		tmp[i] = ft_strdup(tab[i]);
 		++i;
 	}
+	tmp[i] = ft_strdup(s);
 	tmp[i + 1] = NULL;
-	tmp[i] = (char *)malloc(sizeof(char) * ft_strlen(s));
-	ft_memcpy(tmp[i], s, ft_strlen(s));
-	free(tab);
 	return (tmp);
 }
 
@@ -77,7 +75,8 @@ char	**carve_argv(int *argc, char **argv)
 		tab = ft_strsplit(argv[i], ' ');
 		while (tab[y])
 		{
-			final = tab_join(final, tab[y], 0);
+			final = tab_join(final, tab[y]);
+			free(tab[y]);
 			++y;
 		}
 		free(tab);

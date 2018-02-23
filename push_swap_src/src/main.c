@@ -6,14 +6,14 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 00:32:25 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/21 22:32:38 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/23 03:10:04 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft.h"
 
-void	ft_error_del(t_vec *va, t_vec *vb, t_vec *vp)
+void	ft_error_del(t_vec *va, t_vec *vb, t_vec *vp, char **argv)
 {
 	write(2, "Error\n", 6);
 	if (v_size(va) != 0)
@@ -22,6 +22,8 @@ void	ft_error_del(t_vec *va, t_vec *vb, t_vec *vp)
 		v_del(vp);
 	if (v_size(vb) != 0)
 		v_del(vb);
+	free(argv);
+		while (1);
 	exit(1);
 }
 
@@ -31,15 +33,15 @@ int		ft_check_argv(int argc, char **argv, t_vec *va, t_vec *vb)
 
 	flag = 0;
 	if (argc <= 1)
-		ft_error_del(va, vb, va);
+		ft_error_del(va, vb, va, argv);
 	if (!ft_strcmp(argv[1], "-v") || !ft_strcmp(argv[1], "-c"))
 		flag = 1;
 	if (argc <= 2 && flag == 1)
-		ft_error_del(va, vb, va);
+		ft_error_del(va, vb, va, argv);
 	if ((!ft_strcmp(argv[2], "-v") || !ft_strcmp(argv[2], "-c")) && flag == 1)
 		flag = 2;
 	if (argc <= 3 && flag > 0)
-		ft_error_del(va, vb, va);
+		ft_error_del(va, vb, va, argv);
 	if (flag == 1 && !ft_strcmp(argv[1], "-c"))
 		flag = 0;
 	return (flag);
@@ -62,22 +64,33 @@ void	ft_check(t_vec *va, t_vec *vb, char **argv, int argc)
 			if ((argv[argc - y][i - 1] > '9' || argv[argc - y][i - 1] < '0') &&
 					argv[argc - y][i - 1] != '-' &&
 					argv[argc - y][i - 1] != '+')
-				ft_error_del(va, vb, va);
+			{
+				ft_putstr(argv[argc - y]);
+				ft_error_del(va, vb, va, argv);
+			}
 		i = 0;
 		tab[y - 1] = ft_atoi(argv[argc - y]);
 		while (i < y - 1)
 			if (tab[i++] == ft_atoi(argv[argc - y]))
-				ft_error_del(va, vb, va);
+				ft_error_del(va, vb, va, argv);
 		v_push_int(va, ft_atoi(argv[argc - y]));
 	}
 	free(tab);
 }
 
-void	ft_del_vec(t_vec *vp, t_vec *va, t_vec *vb)
+void	ft_del_vec(t_vec *vp, t_vec *va, t_vec *vb, char **argv)
 {
+	int i;
+
+	i = 0;
 	v_del(vp);
 	v_del(va);
 	v_del(vb);
+	while (argv[i])
+	{
+		free(argv[i]);
+		++i;
+	}
 }
 
 int		main(int argc, char **argv)
@@ -97,8 +110,10 @@ int		main(int argc, char **argv)
 	ft_check(&va, &vb, argv, argc);
 	vp = v_new(sizeof(char));
 	if (v_size(&va) >= 11)
-	ft_algo(&va, &vb, &vp, flag);
+		ft_algo(&va, &vb, &vp, flag);
+	else
+		algo_under_ten(&va, &vb, &vp, flag);
 	v_print(&vp, 1);
-	ft_del_vec(&va, &vb, &vp);
+	ft_del_vec(&va, &vb, &vp, argv);
 	return (0);
 }

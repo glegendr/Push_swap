@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 22:26:59 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/21 20:11:15 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/23 03:05:01 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ int		nbef(t_vec *v, int next)
 			min = vec_get(v, i - 1);
 			check = 1;
 		}
-	min = 2147483647;
+	i = 0;
 	if (check == 0)
-		while (i-- > 0)
-			if (vec_get(v, i - 1) < min && vec_get(v, i - 1) > next)
+		while (i++ < v_size(v))
+			if (vec_get(v, i - 1) > min)
 			{
-				ret = v_size(v) - (i - 2);
+				ret = v_size(v) - (i - 1);
 				min = vec_get(v, i - 1);
 				check = 1;
 			}
@@ -160,4 +160,5 @@ void		ft_algo(t_vec *va, t_vec *vb, t_vec *vp, int flag)
 		v_append_raw(vp, ft_push(va, vb, 'a'), 3);
 		ft_print(va, vb, flag, "pa");
 	}
+	free(quart);
 }

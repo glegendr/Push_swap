@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 00:33:20 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/21 22:29:20 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/22 21:12:53 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@
 # define vec_get(a, b) ((int *)v_get(a, b))[0]
 # define vec_gsize(a, b) ((int *)v_get(a, v_size(a) - b))[0]
 
+void		sort_part_i(t_vec *va, t_vec *vb, t_vec *vp, int flag, int quart);
 char		**carve_argv(int *argc, char **argv);
 void		ft_error(void);
 void		ft_algo(t_vec *va, t_vec *vb, t_vec *vp, int flag);
+void		algo_under_ten(t_vec *va, t_vec *vb, t_vec *vp, int flag);
 int			ft_sorted(t_vec *va, t_vec *vb);
 int			*ft_quartile(t_vec *vc);
 int			ft_va_issorted(t_vec *va);
