@@ -6,15 +6,15 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 00:33:20 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/22 00:20:53 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/23 05:53:26 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "vector.h"
-# define vec_get(a, b) ((int *)v_get(a, b))[0]
-# define vec_gsize(a, b) ((int *)v_get(a, v_size(a) - b))[0]
+# define VEC_GET(a, b) ((int *)v_get(a, b))[0]
+# define VEC_GSIZE(a, b) ((int *)v_get(a, v_size(a) - b))[0]
 
 char		**carve_argv(int *argc, char **argv);
 char		*ft_algo(t_vec *va, t_vec *vb, t_vec *vp, int flag);

@@ -1,6 +1,10 @@
-all: checker push_swap
+.PHONY: all checker push_swap clean fclean re $(NAME)
 
-checker:
+NAME=checker
+
+all: $(NAME) push_swap
+
+$(NAME):
 	@make -C checker_src/.
 	@cp checker_src/checker .
 

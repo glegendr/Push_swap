@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 20:16:30 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/22 20:12:21 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/23 05:57:13 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		ft_sorted(t_vec *va, t_vec *vb)
 		return (0);
 	while (i < v_size(va) - 1)
 	{
-		if (vec_get(va, i) < vec_get(va, i + 1))
+		if (VEC_GET(va, i) < VEC_GET(va, i + 1))
 			return (0);
 		++i;
 	}

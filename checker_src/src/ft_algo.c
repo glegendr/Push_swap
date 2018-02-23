@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 00:56:11 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/23 04:45:42 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/23 06:04:33 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,21 @@ int		ft_isactions(char *s)
 
 void	ft_check_vp(t_vec *vp, t_vec *va, t_vec *vb)
 {
-	int i;
-	int y;
-	char *s;
+	int		i;
+	int		y;
+	char	*s;
 
 	i = 0;
 	while (i < v_size(vp))
 	{
 		y = 0;
-		while ((char)vec_get(vp, i + y++) != '\n');
+		while ((char)VEC_GET(vp, i + y) != '\n')
+			++y;
 		s = (char *)malloc(sizeof(char) * y);
 		y = 0;
-		while ((char)vec_get(vp, i) != '\n')
+		while ((char)VEC_GET(vp, i) != '\n')
 		{
-			s[y++] = vec_get(vp, i);
+			s[y++] = VEC_GET(vp, i);
 			++i;
 		}
 		s[y] = '\0';
@@ -50,21 +51,8 @@ void	ft_check_vp(t_vec *vp, t_vec *va, t_vec *vb)
 	}
 }
 
-char	*ft_compare(t_vec *va, t_vec *vb, t_vec *vp, int *i)
+char	*check_actions(t_vec *va, t_vec *vb, char *s)
 {
-	char *s;
-	int y;
-
-	y = 0;
-	while ((char)vec_get(vp, *i + y++) != '\n');
-	s = (char *)malloc(sizeof(char) * y);
-	y = 0;
-	while ((char)vec_get(vp, *i) != '\n')
-	{
-		s[y++] = vec_get(vp, *i);
-		*i += 1;
-	}
-	s[y] = '\0';
 	if (ft_strcmp(s, "rrr") == 0)
 		ft_reverse_rotate(va, vb, 'r');
 	else if (ft_strcmp(s, "rra") == 0)
@@ -90,10 +78,29 @@ char	*ft_compare(t_vec *va, t_vec *vb, t_vec *vp, int *i)
 	return (s);
 }
 
+char	*ft_compare(t_vec *va, t_vec *vb, t_vec *vp, int *i)
+{
+	char	*s;
+	int		y;
+
+	y = 0;
+	while ((char)VEC_GET(vp, *i + y) != '\n')
+		++y;
+	s = (char *)malloc(sizeof(char) * y);
+	y = 0;
+	while ((char)VEC_GET(vp, *i) != '\n')
+	{
+		s[y++] = VEC_GET(vp, *i);
+		*i += 1;
+	}
+	s[y] = '\0';
+	return (check_actions(va, vb, s));
+}
+
 char	*ft_algo(t_vec *va, t_vec *vb, t_vec *vp, int flag)
 {
-	int i;
-	char *s;
+	int		i;
+	char	*s;
 
 	i = 0;
 	ft_check_vp(vp, va, vb);

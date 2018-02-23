@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 20:19:09 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/23 03:24:56 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/23 05:54:59 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void		ft_error_void(void)
 
 void		check_int(int argc, char **argv)
 {
-	long long int i;
-	int y;
+	long long int	i;
+	int				y;
 
 	y = 1;
 	while (y < argc)
@@ -34,10 +34,10 @@ void		check_int(int argc, char **argv)
 	}
 }
 
-char	**tab_join(char **tab, char *s)
+char		**tab_join(char **tab, char *s)
 {
-	int i;
-	char **tmp;
+	int		i;
+	char	**tmp;
 
 	i = 0;
 	if (tab == NULL)
@@ -47,7 +47,8 @@ char	**tab_join(char **tab, char *s)
 		tab[1] = NULL;
 		return (tab);
 	}
-	while (tab[i++]);
+	while (tab[i])
+		++i;
 	tmp = (char **)malloc(sizeof(char *) * (i + 2));
 	i = 0;
 	while (tab[i])
@@ -60,12 +61,12 @@ char	**tab_join(char **tab, char *s)
 	return (tmp);
 }
 
-char	**carve_argv(int *argc, char **argv)
+char		**carve_argv(int *argc, char **argv)
 {
-	int i;
-	int y;
-	char **tab;
-	char **final;
+	int		i;
+	int		y;
+	char	**tab;
+	char	**final;
 
 	final = NULL;
 	i = 0;
@@ -83,7 +84,8 @@ char	**carve_argv(int *argc, char **argv)
 		++i;
 	}
 	i = 0;
-	while (final[++i]);
+	while (final[i])
+		++i;
 	*argc = i;
 	return (final);
 }
