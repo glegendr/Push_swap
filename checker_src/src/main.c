@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 00:32:25 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/22 22:05:50 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/23 04:46:40 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,15 @@ int		main(int argc, char **argv)
 		ft_error(&va, &vb, &va);
 	flag = ft_check_argv(argc, argv, &va, &vb);
 	ft_check(&va, &vb, argv, argc);
-	vp = v_new(sizeof(char *));
+	vp = v_new(sizeof(char));
 	while (get_next_line(0, &s))
 	{
-		v_push(&vp, s);
+		v_append_raw(&vp, s, ft_strlen(s));
+		v_push(&vp, "\n");
 		free(s);
 	}
 	ft_putstr(ft_algo(&va, &vb, &vp, flag));
 	ft_del_vec(&va, &vb, &vp);
+	free(argv);
 	return (0);
 }
