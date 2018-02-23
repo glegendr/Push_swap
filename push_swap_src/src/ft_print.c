@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 00:08:03 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/20 22:31:11 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/23 05:01:54 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		ft_search(t_vec *vec, char *v, char *s, int index)
 void	ft_color(int nb, int flag, int act, int i)
 {
 	char *s;
+
 	if (nb != 0)
 		s = ft_itoa(nb);
 	if (flag == 2 && act == 1)
@@ -68,11 +69,11 @@ void	ft_print(t_vec *va, t_vec *vb, int flag, char *s)
 	while (r > 0)
 	{
 		if (v_size(va) >= r)
-			ft_color(vec_get(va, r - 1), flag, ft_search(va, "va", s, r), 1);
+			ft_color(VEC_GET(va, r - 1), flag, ft_search(va, "va", s, r), 1);
 		else
 			write(1, "            ", 12);
 		if (v_size(vb) >= r)
-			ft_color(vec_get(vb, r - 1), flag, ft_search(vb, "vb", s, r), 0);
+			ft_color(VEC_GET(vb, r - 1), flag, ft_search(vb, "vb", s, r), 0);
 		write(1, "\n", 1);
 		--r;
 	}

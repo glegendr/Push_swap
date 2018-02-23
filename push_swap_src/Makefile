@@ -5,7 +5,7 @@ CFLAG=
 #CFLAG+= -Wextra
 #CFLAG+= -Wall
 #CFLAG+= -fsanitize=address
-SRCNAME=algo_under_ten carve_argv ft_actions ft_algo ft_print ft_sorted main quartile
+SRCNAME=algo_under_ten carve_argv ft_actions ft_algo ft_print ft_sorted main quartile sort_part_i
 
 LIBS= ./dep/libft/libft.a ./dep/libmem/libmem.a ./dep/libvec/libvec.a
 

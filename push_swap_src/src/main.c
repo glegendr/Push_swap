@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 00:32:25 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/23 03:10:04 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/23 05:06:28 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	ft_error_del(t_vec *va, t_vec *vb, t_vec *vp, char **argv)
 	if (v_size(vb) != 0)
 		v_del(vb);
 	free(argv);
-		while (1);
 	exit(1);
 }
 
@@ -64,10 +63,7 @@ void	ft_check(t_vec *va, t_vec *vb, char **argv, int argc)
 			if ((argv[argc - y][i - 1] > '9' || argv[argc - y][i - 1] < '0') &&
 					argv[argc - y][i - 1] != '-' &&
 					argv[argc - y][i - 1] != '+')
-			{
-				ft_putstr(argv[argc - y]);
 				ft_error_del(va, vb, va, argv);
-			}
 		i = 0;
 		tab[y - 1] = ft_atoi(argv[argc - y]);
 		while (i < y - 1)

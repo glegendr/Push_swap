@@ -6,27 +6,14 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 20:21:20 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/23 00:11:38 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/23 05:34:12 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	algo_under_ten(t_vec *va, t_vec *vb, t_vec *vp, int flag)
+void		finish_algo(t_vec *va, t_vec *vb, t_vec *vp, int flag)
 {
-	int *quart;
-	int i;
-	int size;
-
-	size = v_size(va);
-	if (size > 8)
-		size = 8;
-	if (ft_sorted(va, vb))
-		return ;
-	quart = ft_quartile(va);
-	i = 1;
-	while (i <= size)
-		sort_part_i(va, vb, vp, flag, quart[i++]);
 	if (ft_va_issorted(va))
 	{
 		v_append_raw(vp, ft_swap(va, vb, 'a'), 3);
@@ -37,5 +24,30 @@ void	algo_under_ten(t_vec *va, t_vec *vb, t_vec *vp, int flag)
 		v_append_raw(vp, ft_push(va, vb, 'a'), 3);
 		ft_print(va, vb, flag, "pa");
 	}
+}
+
+void		algo_under_ten(t_vec *va, t_vec *vb, t_vec *vp, int flag)
+{
+	int *quart;
+	int i;
+	int size;
+	int *fq;
+
+	fq = (int *)malloc(sizeof(int) * 2);
+	fq[0] = flag;
+	size = v_size(va);
+	if (size > 8)
+		size = 8;
+	if (ft_sorted(va, vb))
+		return ;
+	quart = ft_quartile(va);
+	i = 1;
+	while (i <= size)
+	{
+		fq[1] = quart[i++];
+		sort_part_i(va, vb, vp, fq);
+	}
+	finish_algo(va, vb, vp, flag);
 	free(quart);
+	free(fq);
 }

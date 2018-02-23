@@ -6,17 +6,17 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 00:33:20 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/22 21:12:53 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/02/23 05:41:55 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "vector.h"
-# define vec_get(a, b) ((int *)v_get(a, b))[0]
-# define vec_gsize(a, b) ((int *)v_get(a, v_size(a) - b))[0]
+# define VEC_GET(a, b) ((int *)v_get(a, b))[0]
+# define VEC_GSIZE(a, b) ((int *)v_get(a, v_size(a) - b))[0]
 
-void		sort_part_i(t_vec *va, t_vec *vb, t_vec *vp, int flag, int quart);
+void		sort_part_i(t_vec *va, t_vec *vb, t_vec *vp, int *fq);
 char		**carve_argv(int *argc, char **argv);
 void		ft_error(void);
 void		ft_algo(t_vec *va, t_vec *vb, t_vec *vp, int flag);
@@ -30,4 +30,8 @@ char		*ft_swap(t_vec *va, t_vec *vb, char c);
 char		*ft_push(t_vec *va, t_vec *vb, char c);
 char		*ft_rotate(t_vec *va, t_vec *vb, char c);
 char		*ft_reverse_rotate(t_vec *va, t_vec *vb, char c);
+int			nbef(t_vec *v, int next, int ret, int i);
+int			nbmin(t_vec *v);
+int			nbpos(t_vec *v, int nb);
+int			nextnb_inquart(t_vec *v, int quart);
 #endif
