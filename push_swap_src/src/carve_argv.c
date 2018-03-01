@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 20:19:09 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/23 05:01:32 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/03/01 21:40:16 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char		**tab_join(char **tab, char *s)
 		tmp[i] = ft_strdup(tab[i]);
 		++i;
 	}
+	free(tab);
 	tmp[i] = ft_strdup(s);
 	tmp[i + 1] = NULL;
 	return (tmp);
