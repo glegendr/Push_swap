@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 00:32:25 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/23 04:46:40 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/03/13 18:59:02 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,17 @@ void	ft_check(t_vec *va, t_vec *vb, char **argv, int argc)
 	free(tab);
 }
 
-void	ft_del_vec(t_vec *vp, t_vec *va, t_vec *vb)
+void	ft_del_vec(t_vec *vp, t_vec *va, t_vec *vb, char **tab)
 {
+	int i;
+
+	i = 0;
 	v_del(vp);
 	v_del(va);
 	v_del(vb);
+	while (tab[i])
+		free(tab[i++]);
+	free(tab);
 }
 
 int		main(int argc, char **argv)
@@ -92,6 +98,7 @@ int		main(int argc, char **argv)
 	int		flag;
 
 	argv = carve_argv(&argc, argv);
+	check_int(argc, argv);
 	va = v_new(sizeof(int));
 	vb = v_new(sizeof(int));
 	if (argc <= 2)
@@ -106,7 +113,6 @@ int		main(int argc, char **argv)
 		free(s);
 	}
 	ft_putstr(ft_algo(&va, &vb, &vp, flag));
-	ft_del_vec(&va, &vb, &vp);
-	free(argv);
+	ft_del_vec(&va, &vb, &vp, argv);
 	return (0);
 }

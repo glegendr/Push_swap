@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 20:19:09 by glegendr          #+#    #+#             */
-/*   Updated: 2018/03/01 21:40:16 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/03/13 18:51:20 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ char		**tab_join(char **tab, char *s)
 		++i;
 	tmp = (char **)malloc(sizeof(char *) * (i + 2));
 	i = 0;
+	while (tab[i++])
+		tmp[i - 1] = ft_strdup(tab[i - 1]);
+	i = 0;
 	while (tab[i])
-	{
-		tmp[i] = ft_strdup(tab[i]);
-		++i;
-	}
+		free(tab[i++]);
 	free(tab);
 	tmp[i] = ft_strdup(s);
 	tmp[i + 1] = NULL;

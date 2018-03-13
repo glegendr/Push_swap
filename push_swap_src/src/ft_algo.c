@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 05:06:45 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/23 05:39:25 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/03/13 20:34:18 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ int			nbef(t_vec *v, int next, int ret, int i)
 	min = -2147483648;
 	check = 0;
 	while (i++ < v_size(v))
-		if (VEC_GET(v, i - 1) > min && VEC_GET(v, i - 1) < next)
+		if (*(int *)v_get(v, i - 1) > min && *(int *)v_get(v, i - 1) < next)
 		{
 			ret = v_size(v) - (i - 1);
-			min = VEC_GET(v, i - 1);
+			min = *(int *)v_get(v, i - 1);
 			check = 1;
 		}
 	i = 0;
 	if (check == 0)
 		while (i++ < v_size(v))
-			if (VEC_GET(v, i - 1) > min)
+			if (*(int *)v_get(v, i - 1) > min)
 			{
 				ret = v_size(v) - (i - 1);
-				min = VEC_GET(v, i - 1);
+				min = *(int *)v_get(v, i - 1);
 				check = 1;
 			}
 	if (ret > v_size(v))
@@ -50,8 +50,8 @@ int			nbmin(t_vec *v)
 	min = 2147483647;
 	while (i < v_size(v))
 	{
-		if (VEC_GET(v, i) < min)
-			min = VEC_GET(v, i);
+		if (*(int *)v_get(v, i) < min)
+			min = *(int *)v_get(v, i);
 		++i;
 	}
 	return (min);
@@ -64,7 +64,7 @@ int			nbpos(t_vec *v, int nb)
 	pos = 0;
 	while (pos < v_size(v))
 	{
-		if (VEC_GET(v, pos) == nb)
+		if (*(int *)v_get(v, pos) == nb)
 			return (v_size(v) - pos);
 		++pos;
 	}
@@ -78,8 +78,8 @@ int			nextnb_inquart(t_vec *v, int quart)
 	i = 1;
 	while (i < v_size(v))
 	{
-		if (VEC_GSIZE(v, i) <= quart)
-			return (VEC_GSIZE(v, i));
+		if (*(int *)v_get(v, v_size(v) - i) <= quart)
+			return (*(int *)v_get(v, v_size(v) - i));
 		++i;
 	}
 	return (0);

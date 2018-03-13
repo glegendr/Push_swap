@@ -1,17 +1,16 @@
 NAME=Push_swap
 CC=gcc
 CFLAG=
-#CFLAG+= -Werror
-#CFLAG+= -Wextra
-#CFLAG+= -Wall
-#CFLAG+= -fsanitize=address
-SRCNAME=algo_under_ten carve_argv ft_actions ft_algo ft_print ft_sorted main quartile sort_part_i
+CFLAG+= -Werror
+CFLAG+= -Wextra
+CFLAG+= -Wall
+SRCNAME=algo_under_ten carve_argv ft_actions ft_algo ft_print ft_sorted main quartile sort_part_i algo_under_five
 
-LIBS= ./dep/libft/libft.a ./dep/libmem/libmem.a ./dep/libvec/libvec.a
+LIBS= ../dep/libft/libft.a ../dep/libmem/libmem.a ../dep/libvec/libvec.a
 
-CC_LIBS= make -C ./dep/libft/; make -C ./dep/libmem/; make -C ./dep/libvec/;
+CC_LIBS= make -C ../dep/libft/; make -C ../dep/libmem/; make -C ../dep/libvec/;
 
-INC_DIR_LIBS= -I ./dep/libft/inc/ -I ./dep/libmem/inc/ -I ./dep/libvec/inc/
+INC_DIR_LIBS= -I ../dep/libft/inc/ -I ../dep/libmem/inc/ -I ../dep/libvec/inc/
 
 INC_DIR=./inc/
 

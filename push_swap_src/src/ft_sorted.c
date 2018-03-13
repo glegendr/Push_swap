@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 20:16:30 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/23 05:02:53 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/03/13 20:35:42 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ int		ft_iterations_sort(t_vec *va)
 	y = 0;
 	i = 0;
 	while (i++ < v_size(va))
-		if (max < VEC_GET(va, i - 1))
-			max = VEC_GET(va, i - 1);
+		if (max < *(int *)v_get(va, i - 1))
+			max = *(int *)v_get(va, i - 1);
 	while (i < v_size(va) - 1)
 	{
-		if (VEC_GET(va, i) < VEC_GET(va, i + 1) && VEC_GET(va, i + 1) != max)
+		if (*(int *)v_get(va, i) < *(int *)v_get(va, i + 1) &&
+				*(int *)v_get(va, i + 1) != max)
 			++y;
 		++i;
 	}

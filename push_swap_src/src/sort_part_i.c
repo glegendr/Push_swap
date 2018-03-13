@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 05:38:33 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/23 05:50:04 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/03/13 20:47:49 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 
 void		push_to_b(t_vec *va, t_vec *vb, t_vec *vp, int *fq)
 {
-	while (nbef(vb, VEC_GSIZE(va, 1), 0, 0) != 1 && v_size(vb) > 0 &&
-			nbef(vb, VEC_GSIZE(va, 1), 0, 0) < v_size(vb) / 2)
+	while (nbef(vb, *(int *)v_get(va, v_size(va) - 1), 0, 0) != 1 &&
+			v_size(vb) > 0 &&
+			nbef(vb, *(int *)v_get(va, v_size(va) - 1), 0, 0) < v_size(vb) / 2)
 	{
 		v_append_raw(vp, ft_rotate(va, vb, 'b'), 3);
 		ft_print(va, vb, fq[0], "rb");
 	}
 	while (v_size(vb) > 1 &&
-			nbef(vb, VEC_GSIZE(va, 1), 0, 0) >= v_size(vb) / 2 &&
-			nbef(vb, VEC_GSIZE(va, 1), 0, 0) != 1)
+			nbef(vb, *(int *)v_get(va, v_size(va) - 1), 0, 0) >= v_size(vb) / 2
+			&& nbef(vb, *(int *)v_get(va, v_size(va) - 1), 0, 0) != 1)
 	{
 		v_append_raw(vp, ft_reverse_rotate(va, vb, 'b'), 4);
 		ft_print(va, vb, fq[0], "rrb");
@@ -53,7 +54,7 @@ void		sort_part_i(t_vec *va, t_vec *vb, t_vec *vp, int *fq)
 
 	y = 0;
 	while (y < v_size(va))
-		if (VEC_GSIZE(va, 1) <= fq[1])
+		if (*(int *)v_get(va, v_size(va) - 1) <= fq[1])
 		{
 			push_to_b(va, vb, vp, fq);
 			--y;

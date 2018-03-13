@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 00:32:25 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/23 05:06:28 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/03/13 19:02:02 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 void	ft_error_del(t_vec *va, t_vec *vb, t_vec *vp, char **argv)
 {
+	int i;
+
+	i = 0;
 	write(2, "Error\n", 6);
 	if (v_size(va) != 0)
 		v_del(va);
@@ -22,7 +25,9 @@ void	ft_error_del(t_vec *va, t_vec *vb, t_vec *vp, char **argv)
 		v_del(vp);
 	if (v_size(vb) != 0)
 		v_del(vb);
-	free(argv);
+	while (argv[i])
+		free(argv[i++]);
+	free(argv[i]);
 	exit(1);
 }
 
@@ -87,6 +92,7 @@ void	ft_del_vec(t_vec *vp, t_vec *va, t_vec *vb, char **argv)
 		free(argv[i]);
 		++i;
 	}
+	free(argv);
 }
 
 int		main(int argc, char **argv)
@@ -107,8 +113,10 @@ int		main(int argc, char **argv)
 	vp = v_new(sizeof(char));
 	if (v_size(&va) >= 11)
 		ft_algo(&va, &vb, &vp, flag);
-	else
+	else if (v_size(&va) > 5)
 		algo_under_ten(&va, &vb, &vp, flag);
+	else
+		algo_under_five(&va, &vb, &vp, flag);
 	v_print(&vp, 1);
 	ft_del_vec(&va, &vb, &vp, argv);
 	return (0);

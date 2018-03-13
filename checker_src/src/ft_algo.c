@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/07 00:56:11 by glegendr          #+#    #+#             */
-/*   Updated: 2018/02/23 06:04:33 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/03/13 20:44:46 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ void	ft_check_vp(t_vec *vp, t_vec *va, t_vec *vb)
 	while (i < v_size(vp))
 	{
 		y = 0;
-		while ((char)VEC_GET(vp, i + y) != '\n')
+		while (*(char *)v_get(vp, i + y) != '\n')
 			++y;
 		s = (char *)malloc(sizeof(char) * y);
 		y = 0;
-		while ((char)VEC_GET(vp, i) != '\n')
+		while (*(char *)v_get(vp, i) != '\n')
 		{
-			s[y++] = VEC_GET(vp, i);
+			s[y++] = *(int *)v_get(vp, i);
 			++i;
 		}
 		s[y] = '\0';
@@ -84,13 +84,13 @@ char	*ft_compare(t_vec *va, t_vec *vb, t_vec *vp, int *i)
 	int		y;
 
 	y = 0;
-	while ((char)VEC_GET(vp, *i + y) != '\n')
+	while (*(char *)v_get(vp, *i + y) != '\n')
 		++y;
 	s = (char *)malloc(sizeof(char) * y);
 	y = 0;
-	while ((char)VEC_GET(vp, *i) != '\n')
+	while (*(char *)v_get(vp, *i) != '\n')
 	{
-		s[y++] = VEC_GET(vp, *i);
+		s[y++] = *(int *)v_get(vp, *i);
 		*i += 1;
 	}
 	s[y] = '\0';
