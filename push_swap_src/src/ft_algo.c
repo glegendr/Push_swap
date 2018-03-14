@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 05:06:45 by glegendr          #+#    #+#             */
-/*   Updated: 2018/03/13 20:34:18 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/03/14 22:09:36 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,24 +90,24 @@ void		ft_algo(t_vec *va, t_vec *vb, t_vec *vp, int flag)
 	int *quart;
 	int i;
 	int *fq;
+	int end;
 
 	if (ft_sorted(va, vb))
 		return ;
+	end = 13;
+	if (v_size(va) < 150)
+		end = 7;
 	fq = (int *)malloc(sizeof(int) * 2);
 	fq[0] = flag;
 	quart = ft_quartile(va);
 	i = 1;
-	while (i <= 10)
+	while (i <= end)
 	{
 		fq[1] = quart[i];
 		sort_part_i(va, vb, vp, fq);
 		++i;
 	}
-	while (v_size(vb) > 0)
-	{
-		v_append_raw(vp, ft_push(va, vb, 'a'), 3);
-		ft_print(va, vb, flag, "pa");
-	}
+	algo_under_five(va, vb, vp, flag);
 	free(fq);
 	free(quart);
 }

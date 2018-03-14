@@ -6,7 +6,7 @@
 /*   By: glegendr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 19:02:31 by glegendr          #+#    #+#             */
-/*   Updated: 2018/03/13 20:24:19 by glegendr         ###   ########.fr       */
+/*   Updated: 2018/03/14 21:10:27 by glegendr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		algo_under_two(t_vec *va, t_vec *vb, t_vec *vp, int flag)
 {
 	if (v_size(va) == 1)
 		return ;
-	if (*(int *)v_get(va, 1) > *(int *)v_get(va, 2))
+	if (*(int *)v_get(va, 1) > *(int *)v_get(va, 0))
 	{
 		v_append_raw(vp, ft_swap(va, vb, 'a'), 3);
 		ft_print(va, vb, flag, "sa");
